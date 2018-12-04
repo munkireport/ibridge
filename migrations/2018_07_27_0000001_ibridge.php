@@ -10,7 +10,7 @@ class Ibridge extends Migration
         $capsule = new Capsule();
         $capsule::schema()->create('ibridge', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('serial_number')->unique();
+            $table->string('serial_number', 128)->unique();
             $table->string('boot_uuid',128)->nullable();
             $table->string('build',128)->nullable();
             $table->string('model_identifier',128)->nullable();
