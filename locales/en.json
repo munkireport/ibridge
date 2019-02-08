@@ -3,6 +3,7 @@
  "ibridge_serial_number":"iBridge Serial Number",
  "marketing_name":"Version",
  "clienttab":"iBridge",
+ "clienttabtitle":"iBridge",
  "model_identifier":"Model ID",
  "model_name":"Model Name",
  "noibridge":"No iBridge Devices",
