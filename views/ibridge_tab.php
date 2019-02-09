@@ -33,7 +33,7 @@ $(document).on('appReady', function(){
                     .append($('<h4>')
                         .append($('<i>')
                             .addClass('fa fa-link'))
-                        .append(' '+d.ibridge_model_name))
+                        .append(' '+d.model_name))
                     .append($('<div style="max-width:475px;">')
                         .append($('<table>')
                             .addClass('table table-striped table-condensed')
