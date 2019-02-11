@@ -11,7 +11,7 @@ class iBridgeAddVersionColumn extends Migration
     {
         $capsule = new Capsule();
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
-            $table->string('ibridge_version')->default('');
+            $table->string('ibridge_version',128)->nullable();
             $table->index('ibridge_version');
         });
         
