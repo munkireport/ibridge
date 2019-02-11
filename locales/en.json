@@ -2,6 +2,7 @@
  "boot_uuid":"Boot UUID",
  "build":"OS Build",
  "clienttab":"iBridge",
+ "clienttabtitle":"iBridge",
  "ibridge_serial_number":"iBridge Serial Number",
  "ibridge_version":"iBridge Version",
  "marketing_name":"Version",
