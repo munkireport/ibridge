@@ -15,6 +15,7 @@ class Ibridge_model extends \Model {
 		$this->rs['model_name'] = '';
 		$this->rs['ibridge_serial_number'] = '';
 		$this->rs['marketing_name'] = '';
+		$this->rs['ibridge_version'] = '';
 		
 		if ($serial) {
 			$this->retrieve_record($serial);
@@ -72,7 +73,8 @@ class Ibridge_model extends \Model {
                 'model_identifier' => '',
                 'model_name' => '',
                 'ibridge_serial_number' => '',
-                'marketing_name' => ''
+                'marketing_name' => '',
+                'ibridge_version' => ''
             );
 
             foreach ($myList as $ibridge) {

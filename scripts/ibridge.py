@@ -32,6 +32,35 @@ def get_ibridge_info():
         return items
     except Exception:
         return {}
+        
+def get_ibridge_version():
+	'''Uses system profiler to get the iBridge version if it exists'''
+	cmd = ['/usr/sbin/system_profiler', 'SPHardwareDataType', '-xml']
+	proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
+							stdin=subprocess.PIPE,
+							stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	(output, unused_error) = proc.communicate()
+	out = []
+	try:
+		plist = plistlib.readPlistFromString(output)
+		# system_profiler xml is an array
+		ibridge_version_dict = plist[0]
+		items = ibridge_version_dict['_items']
+		for obj in items:
+			version = {}
+			for item in obj:
+				if 'boot_rom_version' in item:
+					try:
+						ibridgeversion = re.search('\(iBridge: ([^\)]*)', obj[item]).group(1)
+					except AttributeError:
+						ibridgeversion = '' # no match, no iBridge chip
+			
+		version['ibridge_version'] = ibridgeversion
+	except Exception:
+		version['ibridge_version'] = ''
+		
+	out.append(version)
+	return out 
     
 
 def flatten_ibridge_info(array):
@@ -79,6 +108,12 @@ def main():
     result = dict()
     info = get_ibridge_info()
     result = flatten_ibridge_info(info)
+    ibridge_version = get_ibridge_version()
+    try:
+        if result[0]:
+            result[0].update(ibridge_version[0])
+    except IndexError:
+        pass
     
     # Write ibridge results to cache
     output_plist = os.path.join(cachedir, 'ibridge.plist')

@@ -20,6 +20,7 @@ new Ibridge_model;
 			<th data-i18n="serial" data-colname='reportdata.serial_number'></th>
 			<th data-i18n="ibridge.model_name" data-colname='ibridge.model_name'></th>
 			<th data-i18n="ibridge.model_identifier" data-colname='ibridge.model_identifier'></th>
+			<th data-i18n="ibridge.ibridge_version" data-colname='ibridge.ibridge_version'></th>
 			<th data-i18n="ibridge.build" data-colname='ibridge.build'></th>
 			<th data-i18n="ibridge.ibridge_serial_number" data-colname='ibridge.ibridge_serial_number'></th>
 			<th data-i18n="ibridge.boot_uuid" data-colname='ibridge.boot_uuid'></th>
