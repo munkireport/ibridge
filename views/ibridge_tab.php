@@ -1,5 +1,5 @@
 <div id="ibridge-tab"></div>
-<h2 data-i18n="ibridge.clienttabtitle"></h2>
+<h2 data-i18n="ibridge.clienttab"></h2>
 
 <script>
 $(document).on('appReady', function(){
