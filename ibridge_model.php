@@ -92,12 +92,12 @@ class Ibridge_model extends \Model {
                 if ( $this->rs['model_identifier'] == '') {
                     // Macbook Pro
                     $this->rs['model_identifier'] = str_replace(array('Apple T1 chip','Apple T2 chip','Apple T3 chip'), array('iBridge1,1','iBridge2,1','iBridge3,1'), $this->rs['model_name']);
-                    $this->rs['marketing_name'] = str_replace(array('Apple',' ','chip'), array('','',''), $this->rs['model_name']);
+                    $this->rs['marketing_name'] = str_replace(array('Apple',' ','chip','SecurityChip'), array('','','',''), $this->rs['model_name']);
                 } else {
                     // iMac Pro
                     $model_id_array = explode(",",$this->rs['model_identifier']);
-                    $this->rs['model_name'] = str_replace('iBridge', 'Apple T', $model_id_array[0])." chip";
-                    $this->rs['marketing_name'] = str_replace("iBridge", "T", $model_id_array[0]);
+                    $this->rs['model_name'] = str_replace('iBridge', 'Apple T', $model_id_array[0])." Security Chip";
+                    $this->rs['marketing_name'] = str_replace(array("iBridge",'SecurityChip'), array("T",""), $model_id_array[0]);
                 }
                 
                 //Save the data (and save London Bridge from falling down!)
