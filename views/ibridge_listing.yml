@@ -1,0 +1,18 @@
+i18n_title: ibridge.reporttitle
+not_null_column: model_identifier
+table:
+  - column: machine.computer_name
+    i18n_header: listing.computername
+    formatter: clientDetail
+    tab_link: ibridge-tab
+  - column: reportdata.serial_number
+    i18n_header: serial
+  - {i18n_header: ibridge.model_name, column: ibridge.model_name}
+  - {i18n_header: ibridge.model_identifier, column: ibridge.model_identifier}
+  - {i18n_header: ibridge.ibridge_version, column: ibridge.ibridge_version}
+  - {i18n_header: ibridge.os_version, column: ibridge.os_version}
+  - {i18n_header: ibridge.build, column: ibridge.build}
+  - {i18n_header: ibridge.hardware_model, column: ibridge.hardware_model}
+  - {i18n_header: ibridge.device_color, column: ibridge.device_color}
+  - {i18n_header: ibridge.model_number, column: ibridge.model_number}
+  - {i18n_header: ibridge.region_info, column: ibridge.region_info}

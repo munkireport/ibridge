@@ -1,0 +1,8 @@
+type: scrollbox
+widget_id: ibridge-model-widget
+api_url: /module/ibridge/get_scroll_widget/model_name
+i18n_title: ibridge.widget_model
+icon: fa-link
+listing_link: /show/listing/ibridge/ibridge
+search_key: model_name
+i18n_empty_result: no_data

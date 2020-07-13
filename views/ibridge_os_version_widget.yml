@@ -1,0 +1,8 @@
+type: scrollbox
+widget_id: ibridge-os-version-widget
+api_url: /module/ibridge/get_scroll_widget/os_version
+i18n_title: ibridge.os_version
+icon: fa-map-signs
+listing_link: /show/listing/ibridge/ibridge
+search_key: os_version
+i18n_empty_result: no_data

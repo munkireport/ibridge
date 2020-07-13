@@ -19,11 +19,17 @@ $(document).on('appReady', function(){
                 for (var prop in d){
                     // Skip skipThese
                     if(skipThese.indexOf(prop) == -1){
-                        if (d[prop] == ''){
+                        if (d[prop] == '' || d[prop] == null || prop == 'model_name'){
                             // Do nothing for empty values to blank them
                         } else if (prop == "marketing_name"){
                             // Set the tab badge
                             $('#ibridge-cnt').text(d[prop])
+
+                        } else if((prop == 'apple_internal') && d[prop] == 1){
+                           rows = rows + '<tr><th>'+i18n.t('ibridge.'+prop)+'</th><td><span class="label label-danger">'+i18n.t('yes')+'</span></td></tr>';
+                        } else if((prop == 'apple_internal') && d[prop] == 0){
+                           rows = rows + '<tr><th>'+i18n.t('ibridge.'+prop)+'</th><td>'+i18n.t('no')+'</td></tr>';
+
                         } else {
                             rows = rows + '<tr><th>'+i18n.t('ibridge.'+prop)+'</th><td>'+d[prop]+'</td></tr>';
                         }

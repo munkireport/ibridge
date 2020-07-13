@@ -1,0 +1,12 @@
+row1:
+  ibridge_model:
+  ibridge_hardware_model:
+  ibridge_model_identifier:
+row2:
+  ibridge_version:
+  ibridge_build:
+  ibridge_os_version:
+row3:
+  ibridge_device_color:
+  ibridge_model_number:
+  ibridge_region:

@@ -1,0 +1,8 @@
+type: scrollbox
+widget_id: ibridge-device-color-widget
+api_url: /module/ibridge/get_scroll_widget/device_color
+i18n_title: ibridge.device_color
+icon: fa-paint-brush
+listing_link: /show/listing/ibridge/ibridge
+search_key: device_color
+i18n_empty_result: no_data
