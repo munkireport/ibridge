@@ -21,7 +21,6 @@ class Ibridge_model extends \Model {
 		$this->rs['region_info'] = '';
 		$this->rs['os_version'] = '';
 		$this->rs['board_id'] = '';
-		$this->rs['device_color'] = '';
 		$this->rs['model_number'] = '';
 		
 		if ($serial) {

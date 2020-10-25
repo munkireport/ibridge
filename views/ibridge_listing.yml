@@ -13,6 +13,5 @@ table:
   - {i18n_header: ibridge.os_version, column: ibridge.os_version}
   - {i18n_header: ibridge.build, column: ibridge.build}
   - {i18n_header: ibridge.hardware_model, column: ibridge.hardware_model}
-  - {i18n_header: ibridge.device_color, column: ibridge.device_color}
   - {i18n_header: ibridge.model_number, column: ibridge.model_number}
   - {i18n_header: ibridge.region_info, column: ibridge.region_info}

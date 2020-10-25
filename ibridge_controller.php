@@ -33,6 +33,9 @@ class Ibridge_controller extends Module_controller
      **/
     public function get_scroll_widget($column)
     {
+        // Remove non-column name characters
+        $column = preg_replace("/[^A-Za-z0-9_\-]]/", '', $column);
+
         $sql = "SELECT COUNT(CASE WHEN ".$column." <> '' AND ".$column." IS NOT NULL THEN 1 END) AS count, ".$column." 
                 FROM ibridge
                 LEFT JOIN reportdata USING (serial_number)
@@ -51,7 +54,7 @@ class Ibridge_controller extends Module_controller
      **/
     public function get_data($serial_number = '')
     {
-        $sql = "SELECT model_name, model_identifier, ibridge_serial_number, ibridge_version, build, os_version, boot_uuid, marketing_name, hardware_model, device_color, model_number, region_info
+        $sql = "SELECT model_name, model_identifier, ibridge_serial_number, ibridge_version, build, os_version, boot_uuid, marketing_name, hardware_model, model_number, region_info
                     FROM ibridge 
                     WHERE serial_number = '$serial_number'";
 

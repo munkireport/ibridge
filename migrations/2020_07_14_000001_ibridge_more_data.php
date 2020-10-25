@@ -16,7 +16,6 @@ class iBridgeMoreData extends Migration
             $table->string('region_info',128)->nullable();
             $table->string('os_version',128)->nullable();
             $table->string('board_id',128)->nullable();
-            $table->string('device_color',128)->nullable();
             $table->string('model_number',128)->nullable();
             
             $table->index('apple_internal');
@@ -24,7 +23,6 @@ class iBridgeMoreData extends Migration
             $table->index('region_info');
             $table->index('os_version');
             $table->index('board_id');
-            $table->index('device_color');
             $table->index('model_number');
         });
         
@@ -41,7 +39,6 @@ class iBridgeMoreData extends Migration
             $table->dropColumn('region_info');
             $table->dropColumn('os_version');
             $table->dropColumn('board_id');
-            $table->dropColumn('device_color');
             $table->dropColumn('model_number');
         });
     }

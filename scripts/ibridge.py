@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 """
-Devtools for munkireport.
-Will return all details about iBridges in the machine
+iBridge for munkireport.
+Will return all details about iBridge in the machine
 """
 
 import subprocess
@@ -63,10 +63,10 @@ def get_remotectl_data():
 #            out['boot_uuid'] = remove_all('		BootSessionUUID => ', item).strip()
         elif '		BoardId => ' in item:
             out['board_id'] = remove_all('		BoardId => ', item).strip()
-        elif '		DeviceColor => ' in item:
-            out['device_color'] = remove_all('		DeviceColor => ', item).strip().capitalize()
-        elif '		DeviceEnclosureColor => ' in item:
-            out['device_color'] = remove_all('		DeviceEnclosureColor => ', item).strip().capitalize()
+#        elif '		DeviceColor => ' in item:
+#            out['device_color'] = remove_all('		DeviceColor => ', item).strip().capitalize()
+#        elif '		DeviceEnclosureColor => ' in item:
+#            out['device_color'] = remove_all('		DeviceEnclosureColor => ', item).strip().capitalize()
         elif '		ModelNumber => ' in item:
             out['model_number'] = remove_all('		ModelNumber => ', item).strip()
     return out

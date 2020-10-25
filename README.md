@@ -17,5 +17,4 @@ Table Schema
 * region_info - VARCHAR(255) - Machine region
 * os_version - VARCHAR(255) - iBridge OS version
 * board_id - VARCHAR(255) - iBridge board ID
-* device_color - VARCHAR(255) - Device color
 * model_number - VARCHAR(255) - Machine model
