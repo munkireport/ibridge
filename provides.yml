@@ -1,0 +1,30 @@
+client_tabs:
+    ibridge-tab:
+        view: ibridge_tab
+        i18n: ibridge.clienttab
+        badge: ibridge-cnt
+listings:
+    ibridge:
+        view: ibridge_listing
+        i18n: ibridge.clienttab
+reports:
+    ibridge_report:
+        view: ibridge_report
+        i18n: ibridge.reporttitle
+widgets:
+    ibridge_model:
+        view: ibridge_model_widget
+    ibridge_build:
+        view: ibridge_build_widget
+    ibridge_hardware_model:
+        view: ibridge_hardware_model_widget
+    ibridge_version:
+        view: ibridge_version_widget
+    ibridge_model_identifier:
+        view: ibridge_model_identifier_widget
+    ibridge_model_number:
+        view: ibridge_model_number_widget
+    ibridge_os_version:
+        view: ibridge_os_version_widget
+    ibridge_region:
+        view: ibridge_region_widget

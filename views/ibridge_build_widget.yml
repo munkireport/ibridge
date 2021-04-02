@@ -1,0 +1,8 @@
+type: scrollbox
+widget_id: ibridge-build-widget
+api_url: /module/ibridge/get_scroll_widget/build
+i18n_title: ibridge.widget_build
+icon: fa-th-large
+listing_link: /show/listing/ibridge/ibridge
+search_key: build
+i18n_empty_result: no_data

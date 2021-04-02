@@ -8,7 +8,17 @@
  "marketing_name":"Version",
  "model_identifier":"Model ID",
  "model_name":"Model Name",
+ "model_number":"Model Number",
+ "apple_internal":"Apple Internal",
+ "hardware_model":"Hardware Model",
+ "region_info":"Region",
+ "os_version":"iBridge OS Version",
+ "board_id":"Board ID",
+ "device_color":"Device Color",
  "noibridge":"No iBridge Devices",
  "reporttitle":"iBridge Report",
- "widgettitle":"iBridge Versions"
+ "widget_model":"iBridge Model",
+ "widget_build":"iBridge Build",
+ "widget_hardware_model":"iBridge Hardware Model",
+ "widget_model_identifier":"iBridge Model ID"
 }

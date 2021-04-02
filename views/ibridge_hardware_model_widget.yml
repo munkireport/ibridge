@@ -1,0 +1,8 @@
+type: scrollbox
+widget_id: ibridge-hardware-model-widget
+api_url: /module/ibridge/get_scroll_widget/hardware_model
+i18n_title: ibridge.widget_hardware_model
+icon: fa-microchip
+listing_link: /show/listing/ibridge/ibridge
+search_key: hardware_model
+i18n_empty_result: no_data
