@@ -91,7 +91,12 @@ def flatten_ibridge_info(array):
                 ibridge['ibridge_serial_number'] = obj[item]
            
         out.append(ibridge)
-    return out[0]
+        
+    # Check that we have data to return
+    if len(out) > 0:
+        return out[0]
+    else:
+        return {}
     
 def to_bool(s):
     if s == True or "true" in s or "enabled" in s:
