@@ -1,4 +1,4 @@
-#!/usr/local/munkireport/munkireport-python2
+#!/usr/local/bin/python3
 
 """
 iBridge for munkireport.
@@ -26,7 +26,10 @@ def get_ibridge_info():
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (output, unused_error) = proc.communicate()
     try:
-        plist = plistlib.readPlistFromString(output)
+        try:
+            plist = plistlib.readPlistFromString(output)
+        except AttributeError as e:
+            plist = plistlib.loads(output)
         # system_profiler xml is an array
         ibridge_dict = plist[0]
         items = ibridge_dict['_items']
@@ -44,7 +47,7 @@ def get_remotectl_data():
 
     out = {}
 
-    for item in output.split('\n'):
+    for item in output.decode().split('\n'):
         if '		AppleInternal => ' in item:
             out['apple_internal'] = to_bool(remove_all('		AppleInternal => ', item).strip())
         elif '		HWModel => ' in item:
@@ -105,12 +108,7 @@ def to_bool(s):
         return 0
 
 def remove_all(substr, str):
-    index = 0
-    length = len(substr)
-    while string.find(str, substr) != -1:
-        index = string.find(str, substr)
-        str = str[0:index] + str[index+length:]
-    return str
+    return str.replace(substr, "")
 
 def merge_two_dicts(x, y):
     z = x.copy()
@@ -122,7 +120,7 @@ def main():
     """Main"""
     # Check OS version and skip if too old       
     if getOsVersion() < 12:
-        print 'Skipping iBridge check, OS does not support iBridge'
+        print('Skipping iBridge check, OS does not support iBridge')
         exit(0)
 
     # Get results
@@ -133,8 +131,11 @@ def main():
     # Write ibridge results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ibridge.plist')
-    plistlib.writePlist(result, output_plist)
-    #print plistlib.writePlistToString(result)
+    try:
+        plistlib.writePlist(result, output_plist)
+    except:
+        with open(output_plist, 'wb') as fp:
+            plistlib.dump(result, fp, fmt=plistlib.FMT_XML)
 
 if __name__ == "__main__":
     main()
