@@ -128,13 +128,19 @@ def main():
     # Get results
     result = dict()
     info = get_ibridge_info()
-    result = merge_two_dicts(flatten_ibridge_info(info),get_remotectl_data())
+
+    if info:
+        # If we have iBridge data
+        result = merge_two_dicts(flatten_ibridge_info(info),get_remotectl_data())
+    else:
+        # Else if no iBridge
+        result = {}
 
     # Write ibridge results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ibridge.plist')
     plistlib.writePlist(result, output_plist)
-    #print plistlib.writePlistToString(result)
+    # print plistlib.writePlistToString(result)
 
 if __name__ == "__main__":
     main()

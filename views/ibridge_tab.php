@@ -5,13 +5,13 @@
 $(document).on('appReady', function(){
     // Set the tab badge to blank
     $('#ibridge-cnt').html("");
-    
+
 	$.getJSON(appUrl + '/module/ibridge/get_data/' + serialNumber, function(data){
-        
-        if( data.length == 0 ){
-            $('#ibridge-tab').html('<div id="ibridge-tab"></div><h2 data-i18n="ibridge.clienttabtitle"></h2><h4><i class="fa fa-link"></i> '+i18n.t('ibridge.noibridge')+"</h4>");
-        } else{ 
-        
+
+        if( data.length == 0  || !data[0]['hardware_model']){
+            $('#ibridge-tab').html('<div id="ibridge-tab"></div><h2>'+i18n.t('ibridge.clienttab')+'</h2><h4><i class="fa fa-link"></i> '+i18n.t('ibridge.noibridge')+"</h4>");
+        } else{
+
             var skipThese = ['id','serial_number'];
             $.each(data, function(i,d){
                 // Generate rows from data
@@ -44,7 +44,7 @@ $(document).on('appReady', function(){
                         .append($('<table>')
                             .addClass('table table-striped table-condensed')
                             .append($('<tbody>')
-                                .append(rows))))    
+                                .append(rows))))
             })
         }
 	});
