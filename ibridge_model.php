@@ -46,7 +46,8 @@ class Ibridge_model extends \Model {
 		} else { 
 
 			// Delete previous entries
-			// $this->deleteWhere('serial_number=?', $this->serial_number);
+			$this->deleteWhere('serial_number=?', $this->serial_number);
+
 
 			$parser = new CFPropertyList();
 			$parser->parse($plist, CFPropertyList::FORMAT_XML);
