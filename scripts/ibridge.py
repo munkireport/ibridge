@@ -14,9 +14,12 @@ import re
 import string
 
 def getOsVersion():
-    """Returns the minor OS version."""
-    os_version_tuple = platform.mac_ver()[0].split('.')
-    return int(os_version_tuple[1])
+    """Returns the Darwin version."""
+    # Catalina -> 10.15.7 -> 19.6.0 -> 19
+    # os_version_tuple = platform.mac_ver()[0].split('.')
+    # return int(os_version_tuple[1])
+    darwin_version_tuple = platform.release().split('.')
+    return int(darwin_version_tuple[0]) 
 
 def get_ibridge_info():
     '''Uses system profiler to get dev tools for this machine.'''
@@ -69,6 +72,9 @@ def get_remotectl_data():
 #            out['device_color'] = remove_all('		DeviceEnclosureColor => ', item).strip().capitalize()
         elif '		ModelNumber => ' in item:
             out['model_number'] = remove_all('		ModelNumber => ', item).strip()
+        elif 'Found ncm-' in item:
+            # Break so that we don't get data on connected iOS devices, there is another module dedicated to that
+            break
     return out
 
 def flatten_ibridge_info(array):
@@ -121,8 +127,9 @@ def merge_two_dicts(x, y):
 def main():
     """Main"""
     # Check OS version and skip if too old       
-    if getOsVersion() < 12:
-        print 'Skipping iBridge check, OS does not support iBridge'
+    # Needs at least macOS Sierra (Darwin 16)   
+    if getOsVersion() < 16:
+        print('Skipping iBridge check, OS does not support iBridge')
         exit(0)
 
     # Get results

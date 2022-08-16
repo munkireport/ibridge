@@ -21,7 +21,7 @@ $(document).on('appReady', function(){
                     if(skipThese.indexOf(prop) == -1){
                         if (d[prop] == '' || d[prop] == null || prop == 'model_name'){
                             // Do nothing for empty values to blank them
-                        } else if (prop == "marketing_name"){
+                        } else if (prop == "marketing_name" && (d[prop] == "T1" || d[prop] == "T2")){
                             // Set the tab badge
                             $('#ibridge-cnt').text(d[prop])
 
@@ -35,16 +35,29 @@ $(document).on('appReady', function(){
                         }
                     }
                 }
-                $('#ibridge-tab')
-                    .append($('<h4>')
-                        .append($('<i>')
-                            .addClass('fa fa-link'))
-                        .append(' '+d.model_name))
-                    .append($('<div style="max-width:475px;">')
-                        .append($('<table>')
-                            .addClass('table table-striped table-condensed')
-                            .append($('<tbody>')
-                                .append(rows))))
+                if (d.model_name){
+                    $('#ibridge-tab')
+                        .append($('<h4>')
+                            .append($('<i>')
+                                .addClass('fa fa-link'))
+                            .append(' '+d.model_name))
+                        .append($('<div style="max-width:475px;">')
+                            .append($('<table>')
+                                .addClass('table table-striped table-condensed')
+                                .append($('<tbody>')
+                                    .append(rows))))
+                } else {
+                    $('#ibridge-tab')
+                        .append($('<h4>')
+                            .append($('<i>')
+                                .addClass('fa fa-link'))
+                            .append(' '+d.hardware_model))
+                        .append($('<div style="max-width:475px;">')
+                            .append($('<table>')
+                                .addClass('table table-striped table-condensed')
+                                .append($('<tbody>')
+                                    .append(rows))))
+                }
             })
         }
 	});
