@@ -35,6 +35,7 @@ $(document).on('appReady', function(){
                         }
                     }
                 }
+
                 if (d.model_name){
                     $('#ibridge-tab')
                         .append($('<h4>')
