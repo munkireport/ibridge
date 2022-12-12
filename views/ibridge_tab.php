@@ -6,7 +6,8 @@ $(document).on('appReady', function(){
     // Set the tab badge to blank
     $('#ibridge-cnt').html("");
 
-	$.getJSON(appUrl + '/module/ibridge/get_data/' + serialNumber, function(data){
+    $.getJSON(appUrl + '/module/ibridge/get_data/' + serialNumber, function(data){
+
 
         if( data.length == 0  || !data[0]['hardware_model']){
             $('#ibridge-tab').html('<div id="ibridge-tab"></div><h2>'+i18n.t('ibridge.clienttab')+'</h2><h4><i class="fa fa-link"></i> '+i18n.t('ibridge.noibridge')+"</h4>");
@@ -61,6 +62,6 @@ $(document).on('appReady', function(){
                 }
             })
         }
-	});
+    });
 });
 </script>
