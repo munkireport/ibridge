@@ -124,6 +124,7 @@ def merge_two_dicts(x, y):
 
 def main():
     """Main"""
+
     # Check OS version and skip if too old
     # Needs at least macOS Sierra (Darwin 16)   
     if getOsVersion() < 16:
@@ -144,6 +145,7 @@ def main():
     # Write ibridge results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ibridge.plist')
+
     try:
         plistlib.writePlist(result, output_plist)
     except:
