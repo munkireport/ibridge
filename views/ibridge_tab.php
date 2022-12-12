@@ -5,13 +5,13 @@
 $(document).on('appReady', function(){
     // Set the tab badge to blank
     $('#ibridge-cnt').html("");
-    
-	$.getJSON(appUrl + '/module/ibridge/get_data/' + serialNumber, function(data){
-        
-        if( data.length == 0 ){
-            $('#ibridge-tab').html('<div id="ibridge-tab"></div><h2 data-i18n="ibridge.clienttabtitle"></h2><h4><i class="fa fa-link"></i> '+i18n.t('ibridge.noibridge')+"</h4>");
-        } else{ 
-        
+
+    $.getJSON(appUrl + '/module/ibridge/get_data/' + serialNumber, function(data){
+
+        if( data.length == 0  || !data[0]['hardware_model']){
+            $('#ibridge-tab').html('<div id="ibridge-tab"></div><h2>'+i18n.t('ibridge.clienttab')+'</h2><h4><i class="fa fa-link"></i> '+i18n.t('ibridge.noibridge')+"</h4>");
+        } else{
+
             var skipThese = ['id','serial_number'];
             $.each(data, function(i,d){
                 // Generate rows from data
@@ -21,7 +21,7 @@ $(document).on('appReady', function(){
                     if(skipThese.indexOf(prop) == -1){
                         if (d[prop] == '' || d[prop] == null || prop == 'model_name'){
                             // Do nothing for empty values to blank them
-                        } else if (prop == "marketing_name"){
+                        } else if (prop == "marketing_name" && (d[prop] == "T1" || d[prop] == "T2")){
                             // Set the tab badge
                             $('#ibridge-cnt').text(d[prop])
 
@@ -35,18 +35,32 @@ $(document).on('appReady', function(){
                         }
                     }
                 }
-                $('#ibridge-tab')
-                    .append($('<h4>')
-                        .append($('<i>')
-                            .addClass('fa fa-link'))
-                        .append(' '+d.model_name))
-                    .append($('<div style="max-width:475px;">')
-                        .append($('<table>')
-                            .addClass('table table-striped table-condensed')
-                            .append($('<tbody>')
-                                .append(rows))))    
+
+                if (d.model_name){
+                    $('#ibridge-tab')
+                        .append($('<h4>')
+                            .append($('<i>')
+                                .addClass('fa fa-link'))
+                            .append(' '+d.model_name))
+                        .append($('<div style="max-width:475px;">')
+                            .append($('<table>')
+                                .addClass('table table-striped table-condensed')
+                                .append($('<tbody>')
+                                    .append(rows))))
+                } else {
+                    $('#ibridge-tab')
+                        .append($('<h4>')
+                            .append($('<i>')
+                                .addClass('fa fa-link'))
+                            .append(' '+d.hardware_model))
+                        .append($('<div style="max-width:475px;">')
+                            .append($('<table>')
+                                .addClass('table table-striped table-condensed')
+                                .append($('<tbody>')
+                                    .append(rows))))
+                }
             })
         }
-	});
+    });
 });
 </script>

@@ -75,6 +75,9 @@ def get_remotectl_data():
 #            out['device_color'] = remove_all('		DeviceEnclosureColor => ', item).strip().capitalize()
         elif '		ModelNumber => ' in item:
             out['model_number'] = remove_all('		ModelNumber => ', item).strip()
+        elif 'Found ncm-' in item:
+            # Break so that we don't get data on connected iOS devices, there is another module dedicated to that
+            break
     return out
 
 def flatten_ibridge_info(array):
@@ -130,7 +133,13 @@ def main():
     # Get results
     result = dict()
     info = get_ibridge_info()
-    result = merge_two_dicts(flatten_ibridge_info(info),get_remotectl_data())
+
+    if info:
+        # If we have iBridge data
+        result = merge_two_dicts(flatten_ibridge_info(info),get_remotectl_data())
+    else:
+        # Else if no iBridge
+        result = {}
 
     # Write ibridge results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
