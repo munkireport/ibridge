@@ -61,7 +61,7 @@ class Ibridge_model extends \Model {
 			}
 
 			// Resolve marketing name
-			$model_id_array = explode(",",$this->rs['model_identifier']);
+			$model_id_array = explode(",",(string)$this->rs['model_identifier']);
 			$this->rs['marketing_name'] = str_replace("iBridge", "T", $model_id_array[0]);
 
 			// Save the data (and save London Bridge from falling down!)
