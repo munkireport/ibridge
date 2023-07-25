@@ -6,3 +6,4 @@ icon: fa-lightbulb-o
 listing_link: /show/listing/ibridge/ibridge
 search_key: model_identifier
 i18n_empty_result: no_data
+badge: count

@@ -6,3 +6,4 @@ icon: fa-globe
 listing_link: /show/listing/ibridge/ibridge
 search_key: region_info
 i18n_empty_result: no_data
+badge: count
