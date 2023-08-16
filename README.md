@@ -18,3 +18,4 @@ Table Schema
 * os_version - VARCHAR(255) - iBridge OS version
 * board_id - VARCHAR(255) - iBridge board ID
 * model_number - VARCHAR(255) - Machine model
+* device_color - VARCHAR(128) - Device color

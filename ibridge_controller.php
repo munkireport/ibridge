@@ -57,7 +57,7 @@ class Ibridge_controller extends Module_controller
         // Remove non-serial number characters
         $serial_number = preg_replace("/[^A-Za-z0-9_\-]]/", '', $serial_number);
 
-        $sql = "SELECT model_name, model_identifier, ibridge_serial_number, ibridge_version, build, os_version, boot_uuid, marketing_name, hardware_model, model_number, region_info
+        $sql = "SELECT model_name, model_identifier, ibridge_serial_number, ibridge_version, build, os_version, boot_uuid, marketing_name, hardware_model, model_number, region_info, device_color
                     FROM ibridge 
                     WHERE serial_number = '$serial_number'";
 

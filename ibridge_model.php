@@ -22,6 +22,7 @@ class Ibridge_model extends \Model {
 		$this->rs['os_version'] = NULL;
 		$this->rs['board_id'] = NULL;
 		$this->rs['model_number'] = NULL;
+		$this->rs['device_color'] = NULL;
 
 		// if ($serial) {
 			// $this->retrieve_record($serial);
