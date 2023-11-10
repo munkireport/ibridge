@@ -118,7 +118,7 @@ def get_remotectl_data():
                         out['device_color'] = "Orange"
                     elif device_color == "8" and mac_model == "MacBook Air": # MacBook Air only
                         out['device_color'] = "Starlight"
-                    elif device_color is "9":
+                    elif device_color == "9":
                         out['device_color'] = "Space Black"
                     else:
                         out['device_color'] = ""
