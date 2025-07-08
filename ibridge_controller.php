@@ -8,18 +8,18 @@
  **/
 class Ibridge_controller extends Module_controller
 {
-	/*** Protect methods with auth! ****/
-	function __construct()
-	{
+    /*** Protect methods with auth! ****/
+    function __construct()
+    {
         // Store module path
         $this->module_path = dirname(__FILE__);
-	}
+    }
 
-	/**
-	 * Default method
-	 * @author tuxudo
-	 *
-	 **/
+    /**
+     * Default method
+     * @author tuxudo
+     *
+     **/
     function index()
     {
         echo "You've loaded the ibridge module!";
@@ -48,7 +48,7 @@ class Ibridge_controller extends Module_controller
         jsonView($queryobj->query($sql));
     }
 
-	/**
+    /**
      * Retrieve data in json format
      *
      **/
@@ -59,7 +59,9 @@ class Ibridge_controller extends Module_controller
 
         $sql = "SELECT model_name, model_identifier, ibridge_serial_number, ibridge_version, build, os_version, boot_uuid, marketing_name, hardware_model, model_number, region_info, device_color
                     FROM ibridge 
-                    WHERE serial_number = '$serial_number'";
+                    LEFT JOIN reportdata USING (serial_number)
+                    ".get_machine_group_filter()."
+                    AND serial_number = '$serial_number'";
 
         $queryobj = new Ibridge_model();
         jsonView($queryobj->query($sql));

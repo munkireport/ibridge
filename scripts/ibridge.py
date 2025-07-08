@@ -13,6 +13,10 @@ import platform
 import re
 import string
 
+sys.path.insert(0, '/usr/local/munkireport')
+
+from munkilib import FoundationPlist
+
 def getOsVersion():
     """Returns the Darwin version."""
     # Catalina -> 10.15.7 -> 19.6.0 -> 19
@@ -136,6 +140,12 @@ def flatten_ibridge_info(array):
     out = []
     for obj in array:
         ibridge = {}
+
+        # Set the machine description
+        machine_desc = re.sub(r'[^"a-zA-Z0-9 (),-]', '', get_description())
+        if machine_desc:
+            ibridge["machine_desc"] = re.sub(r'[^"a-zA-Z0-9 (),-]', '', get_description())
+
         for item in obj:
             if item == '_items':
                 out = out + flatten_ibridge_info(obj['_items'])
@@ -157,6 +167,32 @@ def flatten_ibridge_info(array):
         return out[0]
     else:
         return {}
+
+def get_description():
+    """Gets the Mac model description."""
+    cpu_arch = os.uname()[3].lower()
+
+    try:
+        # Do things for Intel Macs
+        if 'x86_64' in cpu_arch or 'i386' in cpu_arch:
+
+            if os.path.isfile('/System/Library/PrivateFrameworks/ServerInformation.framework/Resources/en.lproj/SIMachineAttributes.plist'):
+
+                cmd = ['/usr/sbin/sysctl', '-n', 'hw.model']
+                output = subprocess.check_output(cmd)
+                output = output.decode("utf-8", errors="ignore")
+                machine_descs = FoundationPlist.readPlist('/System/Library/PrivateFrameworks/ServerInformation.framework/Resources/en.lproj/SIMachineAttributes.plist')
+
+                if output in machine_descs and "_LOCALIZABLE_" in machine_descs[output] and "marketingModel" in machine_descs[output]["_LOCALIZABLE_"]:
+                    return (machine_descs[output]["_LOCALIZABLE_"]["marketingModel"])
+
+        else:
+            cmd = ['/usr/sbin/ioreg', '-ar', '-k', 'product-name']
+            output = subprocess.check_output(cmd)
+            plist = FoundationPlist.readPlistFromString(output)
+            return (plist[0]["product-name"].decode("utf-8", errors="ignore"))
+    except:
+        return False
     
 def to_bool(s):
     if s == True or "true" in s or "enabled" in s:
@@ -197,11 +233,8 @@ def main():
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ibridge.plist')
 
-    try:
-        plistlib.writePlist(result, output_plist)
-    except:
-        with open(output_plist, 'wb') as fp:
-            plistlib.dump(result, fp, fmt=plistlib.FMT_XML)
+    with open(output_plist, 'wb') as fp:
+        plistlib.dump(result, fp, fmt=plistlib.FMT_XML)
 
 if __name__ == "__main__":
     main()

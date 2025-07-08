@@ -15,7 +15,7 @@ class iBridgeAddVersionColumn extends Migration
             $table->index('ibridge_version');
         });
         
-        # Force reload local admin data
+        # Force reload local ibridge data
         $capsule::unprepared("UPDATE hash SET hash = 'x' WHERE name = '$this->tableName'");
 
     }
