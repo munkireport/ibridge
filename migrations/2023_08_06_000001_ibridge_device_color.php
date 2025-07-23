@@ -3,7 +3,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-class iBridgeAddVersionColumn extends Migration
+class iBridgeDeviceColor extends Migration
 {
     private $tableName = 'ibridge';
 
@@ -11,20 +11,17 @@ class iBridgeAddVersionColumn extends Migration
     {
         $capsule = new Capsule();
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
-            $table->string('ibridge_version',128)->nullable();
-            $table->index('ibridge_version');
+            $table->string('device_color',128)->nullable();
+            
+            $table->index('device_color');
         });
-        
-        # Force reload local ibridge data
-        $capsule::unprepared("UPDATE hash SET hash = 'x' WHERE name = '$this->tableName'");
-
     }
     
     public function down()
     {
         $capsule = new Capsule();
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
-            $table->dropColumn('ibridge_version');
+            $table->dropColumn('device_color');
         });
     }
 }

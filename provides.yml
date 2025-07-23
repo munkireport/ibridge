@@ -16,6 +16,8 @@ widgets:
         view: ibridge_model_widget
     ibridge_build:
         view: ibridge_build_widget
+    ibridge_device_color:
+        view: ibridge_device_color_widget
     ibridge_hardware_model:
         view: ibridge_hardware_model_widget
     ibridge_version:

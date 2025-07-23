@@ -3,6 +3,7 @@
  "build":"OS Build",
  "clienttab":"iBridge",
  "clienttabtitle":"iBridge",
+ "device_color": "Device Color",
  "ibridge_serial_number":"iBridge Serial Number",
  "ibridge_version":"iBridge Version",
  "marketing_name":"Version",
