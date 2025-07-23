@@ -144,7 +144,7 @@ def flatten_ibridge_info(array):
         # Set the machine description
         machine_desc = re.sub(r'[^"a-zA-Z0-9 (),-]', '', get_description())
         if machine_desc:
-            ibridge["machine_desc"] = re.sub(r'[^"a-zA-Z0-9 (),-]', '', get_description())
+            ibridge["machine_desc"] = machine_desc
 
         for item in obj:
             if item == '_items':
@@ -184,13 +184,12 @@ def get_description():
                 machine_descs = FoundationPlist.readPlist('/System/Library/PrivateFrameworks/ServerInformation.framework/Resources/en.lproj/SIMachineAttributes.plist')
 
                 if output in machine_descs and "_LOCALIZABLE_" in machine_descs[output] and "marketingModel" in machine_descs[output]["_LOCALIZABLE_"]:
-                    return (machine_descs[output]["_LOCALIZABLE_"]["marketingModel"])
-
+                    return str(machine_descs[output]["_LOCALIZABLE_"]["marketingModel"])
         else:
             cmd = ['/usr/sbin/ioreg', '-ar', '-k', 'product-name']
             output = subprocess.check_output(cmd)
             plist = FoundationPlist.readPlistFromString(output)
-            return (plist[0]["product-name"].decode("utf-8", errors="ignore"))
+            return str(plist[0]["product-name"].decode("utf-8", errors="ignore"))
     except:
         return False
     
