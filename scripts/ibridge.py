@@ -142,9 +142,9 @@ def flatten_ibridge_info(array):
         ibridge = {}
 
         # Set the machine description
-        machine_desc = re.sub(r'[^"a-zA-Z0-9 (),-]', '', get_description())
+        machine_desc = get_description()
         if machine_desc:
-            ibridge["machine_desc"] = machine_desc
+            ibridge["machine_desc"] = re.sub(r'[^"a-zA-Z0-9 (),-]', '', machine_desc)
 
         for item in obj:
             if item == '_items':
