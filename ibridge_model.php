@@ -6,7 +6,7 @@ class Ibridge_model extends \Model {
 
     function __construct($serial='')
     {
-        parent::__construct('id', 'ibridge'); //primary key, tablename
+        parent::__construct('id', 'ibridge'); // Primary key, tablename
         $this->rs['id'] = '';
         $this->rs['serial_number'] = $serial;
         $this->rs['boot_uuid'] = NULL;
@@ -73,20 +73,61 @@ class Ibridge_model extends \Model {
                 // Check that we have a proper URL
                 $color_url_result = $this->device_color_url($this->rs['model_identifier'], $ibridge['machine_desc'], $this->rs['device_color']);
                 if ($color_url_result){
-                    $sql = "UPDATE `machine` SET `machine_desc` = '".$ibridge['machine_desc']."', `img_url` = '$color_url_result' WHERE serial_number = '$this->serial_number'";
-                } else {
-                    $sql = "UPDATE `machine` SET `machine_desc` = '".$ibridge['machine_desc']."' WHERE serial_number = '$this->serial_number'";
-                }
 
-                $queryobj = new Ibridge_model;
-                $queryobj->query($sql);
+                    // Update columns in machine table
+                    // Retrieve machine record (if existing)
+                    try {
+                        $Machine_model = Machine_model::select()
+                            ->where('serial_number', $this->serial_number)
+                            ->firstOrFail();
+                    } catch (\Throwable $th) {
+                        $Machine_model = new Machine_model();
+                        $Machine_model->hostname = ""; // Will be updated later by machine module
+                        $Machine_model->machine_model = $ibridge['model_identifier'];
+                    }
+
+                    $Machine_model->serial_number = $this->serial_number;
+                    $Machine_model->machine_desc = $ibridge['machine_desc'];
+                    $Machine_model->img_url = $color_url_result;
+                    $Machine_model->save();
+
+                } else {
+
+                    // Update columns in machine table
+                    // Retrieve machine record (if existing)
+                    try {
+                        $Machine_model = Machine_model::select()
+                            ->where('serial_number', $this->serial_number)
+                            ->firstOrFail();
+                    } catch (\Throwable $th) {
+                        $Machine_model = new Machine_model();
+                        $Machine_model->hostname = ""; // Will be updated later by machine module
+                        $Machine_model->machine_model = $ibridge['model_identifier'];
+                    }
+
+                    $Machine_model->serial_number = $this->serial_number;
+                    $Machine_model->machine_desc = $ibridge['machine_desc'];
+                    $Machine_model->save();
+                }
 
             // Set and save model description if present
             } else if (array_key_exists("machine_desc", $ibridge)) {
-                $sql = "UPDATE `machine` SET `machine_desc` = '".$ibridge['machine_desc']."' WHERE serial_number = '$this->serial_number'";
 
-                $queryobj = new Ibridge_model;
-                $queryobj->query($sql);
+                // Update columns in machine table
+                // Retrieve machine record (if existing)
+                try {
+                    $Machine_model = Machine_model::select()
+                        ->where('serial_number', $this->serial_number)
+                        ->firstOrFail();
+                } catch (\Throwable $th) {
+                    $Machine_model = new Machine_model();
+                    $Machine_model->hostname = ""; // Will be updated later by machine module
+                    $Machine_model->machine_model = $ibridge['model_identifier'];
+                }
+
+                $Machine_model->serial_number = $this->serial_number;
+                $Machine_model->machine_desc = $ibridge['machine_desc'];
+                $Machine_model->save();
             }
         }
     }
